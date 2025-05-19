@@ -49,4 +49,13 @@ class GetApiController {
         return userRequest
     }
 
+    // query param map : 파라미터 키값 '-' 포함된 경우, map으로 받아서 키값사용 가능
+    // http://localhost:8080/api/get-mapping/query-param/map?name=yina&age=20&email=yina.dev@gmail.com&address=용마산&phone-number=01030868360
+    @GetMapping("/get-mapping/query-param/map")
+    fun queryParamMap(@RequestParam map: Map<String, Any>): Map<String, Any> {
+        println(map)
+        println("하이픈이 들어간 키값 phone-number="+ map.getOrDefault("phone-number", ""))
+        return map
+    }
+
 }
