@@ -2,6 +2,9 @@ package com.example.mvc.model.http
 
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.annotation.JsonPropertyOrder
+import com.fasterxml.jackson.databind.PropertyNamingStrategies // instead PropertyNamingStrategy
+import com.fasterxml.jackson.databind.PropertyNamingStrategy // deprecated
+import com.fasterxml.jackson.databind.annotation.JsonNaming
 
 @JsonPropertyOrder(
     "address",
@@ -9,12 +12,17 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder
     "name",
     "age"
 )
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy::class) // 각 필드별 JsonProperty 붙이지 않고 camel <-> snake 케이스 변환
 data class UserRequest (
-    var name:String?=null
-    ,var age:Int?=null
-    ,var email:String?=null
-    ,var address:String?=null
+    var name:String?=null,
+    var age:Int?=null,
+    var email:String?=null,
+    var address:String?=null,
+
+    //@JsonProperty("phone_number")
+    var phoneNumber:String?=null // phone_number
 )
+
 /**
  1. data 키워드
     - 컴파일러가 자동으로 메서드 생성
